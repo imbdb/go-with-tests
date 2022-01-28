@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 //Languages
 const (
@@ -21,17 +23,20 @@ func Hello(name string, language string) string {
 	if name == "" {
 		name = "World"
 	}
-	greeting := englishGreeting
-	//handle language
+
+	return greetingByLanguage(language) + ", " + name + "!"
+}
+
+func greetingByLanguage(language string) (greeting string) {
 	switch language {
-	case english:
-		greeting = englishGreeting
 	case spanish:
 		greeting = spanishGreeting
 	case french:
 		greeting = frenchGreeting
+	default:
+		greeting = englishGreeting
 	}
-	return greeting + ", " + name + "!"
+	return
 }
 
 func main() {

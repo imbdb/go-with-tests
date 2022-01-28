@@ -11,29 +11,21 @@ func TestHello(t *testing.T) {
 		}
 	}
 
+	testHelloHelper := func(t testing.T, testName string, name string, language string, want string) {
+		t.Helper()
+		t.Run(testName, func(t *testing.T) {
+			got := Hello(name, language)
+			assertCorrectMessage(t, got, want)
+		})
+	}
+
 	// Sub tests
-	t.Run("saying hello to people", func(t *testing.T) {
-		got := Hello("imbdb", "")
-		want := "Hello, imbdb!"
-		assertCorrectMessage(t, got, want)
-	})
+	testHelloHelper(*t, "saying hello to people", "imbdb", "", "Hello, imbdb!")
 
-	t.Run("saying hello to people in spanish", func(t *testing.T) {
-		got := Hello("imbdb", "spanish")
-		want := "Hola, imbdb!"
-		assertCorrectMessage(t, got, want)
-	})
+	testHelloHelper(*t, "saying hello to people in spanish", "imbdb", "spanish", "Hola, imbdb!")
 
-	t.Run("saying hello to people in french", func(t *testing.T) {
-		got := Hello("imbdb", "french")
-		want := "Bonjour, imbdb!"
-		assertCorrectMessage(t, got, want)
-	})
+	testHelloHelper(*t, "saying hello to people in french", "imbdb", "french", "Bonjour, imbdb!")
 
-	t.Run("saying 'Hello, World!' when an empty string is supplied", func(t *testing.T) {
-		got := Hello("", "")
-		want := "Hello, World!"
-		assertCorrectMessage(t, got, want)
-	})
+	testHelloHelper(*t, "saying 'Hello, World!' when an empty string is supplied", "", "", "Hello, World!")
 
 }

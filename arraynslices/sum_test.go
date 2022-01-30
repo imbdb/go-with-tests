@@ -3,19 +3,19 @@ package arraynslices
 import (
 	"reflect"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestSum(t *testing.T) {
 
-	t.Run("sum of collection of any size", func(t *testing.T) {
+	Convey("sum of collection of any size", t, func() {
 		numbers := []int{1, 2, 3}
 
 		got := Sum(numbers)
 		expected := 6
 
-		if got != expected {
-			t.Errorf("expected '%d' but got '%d', given %v", expected, got, numbers)
-		}
+		So(got, ShouldEqual, expected)
 	})
 
 }
@@ -28,49 +28,49 @@ func checkSums(t testing.TB, got, want []int) {
 }
 
 func TestSumAll(t *testing.T) {
-	t.Run("Sum of some slices", func(t *testing.T) {
+	Convey("Sum of some slices", t, func() {
 		got := SumAll([]int{1, 2}, []int{0, 9})
 		want := []int{3, 9}
 
-		checkSums(t, got, want)
+		So(got, ShouldResemble, want)
 	})
 
-	t.Run("safely sum empty slices", func(t *testing.T) {
+	Convey("safely sum empty slices", t, func() {
 		got := SumAll([]int{}, []int{0, 9})
 		want := []int{0, 9}
 
-		checkSums(t, got, want)
+		So(got, ShouldResemble, want)
 	})
 }
 
 func TestSumAllTail(t *testing.T) {
-	t.Run("Tail Sum of some slices", func(t *testing.T) {
+	Convey("Tail Sum of some slices", t, func() {
 		got := SumAllTail([]int{1, 2}, []int{0, 9})
 		want := []int{2, 9}
 
-		checkSums(t, got, want)
+		So(got, ShouldResemble, want)
 	})
 
-	t.Run("safely tail sum empty slices", func(t *testing.T) {
+	Convey("safely tail sum empty slices", t, func() {
 		got := SumAllTail([]int{}, []int{0, 9})
 		want := []int{0, 9}
 
-		checkSums(t, got, want)
+		So(got, ShouldResemble, want)
 	})
 }
 
 func TestSumAllHead(t *testing.T) {
-	t.Run("Head Sum of some slices", func(t *testing.T) {
+	Convey("Head Sum of some slices", t, func() {
 		got := SumAllHead([]int{1, 2, 3}, []int{0, 9, 8, 1})
 		want := []int{3, 17}
 
-		checkSums(t, got, want)
+		So(got, ShouldResemble, want)
 	})
 
-	t.Run("safely head sum empty slices", func(t *testing.T) {
+	Convey("safely head sum empty slices", t, func() {
 		got := SumAllHead([]int{}, []int{0, 9, 8, 1})
 		want := []int{0, 17}
 
-		checkSums(t, got, want)
+		So(got, ShouldResemble, want)
 	})
 }

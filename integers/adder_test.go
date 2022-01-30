@@ -3,15 +3,17 @@ package integers
 import (
 	"fmt"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestAdder(t *testing.T) {
-	sum := Add(2, 2)
-	expected := 4
+	Convey("Should return sum of the arguments", t, func() {
+		sum := Add(2, 2)
+		expected := 4
 
-	if sum != expected {
-		t.Errorf("expected '%d' but got '%d'", expected, sum)
-	}
+		So(sum, ShouldEqual, expected)
+	})
 }
 
 func ExampleAdd() {

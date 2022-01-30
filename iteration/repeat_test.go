@@ -3,15 +3,17 @@ package iteration
 import (
 	"fmt"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestRepeat(t *testing.T) {
-	repeated := Repeat("a", 5)
-	expected := "aaaaa"
+	Convey("Should repeat character given number of times", t, func() {
+		repeated := Repeat("a", 5)
+		expected := "aaaaa"
 
-	if repeated != expected {
-		t.Errorf("expected %q but got %q", expected, repeated)
-	}
+		So(repeated, ShouldEqual, expected)
+	})
 }
 
 func BenchmarkRepeat(b *testing.B) {

@@ -1,31 +1,35 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
+)
 
 func TestHello(t *testing.T) {
-	// Reducing duplication
-	assertCorrectMessage := func(t testing.TB, got, want string) {
-		t.Helper()
-		if got != want {
-			t.Errorf("got %q want %q", got, want)
-		}
-	}
-
-	testHelloHelper := func(t testing.T, testName string, name string, language string, want string) {
-		t.Helper()
-		t.Run(testName, func(t *testing.T) {
-			got := Hello(name, language)
-			assertCorrectMessage(t, got, want)
-		})
-	}
-
 	// Sub tests
-	testHelloHelper(*t, "saying hello to people", "imbdb", "", "Hello, imbdb!")
+	Convey("saying hello to people", t, func() {
+		got := Hello("imbdb", "")
+		expected := "Hello, imbdb!"
+		So(got, ShouldEqual, expected)
+	})
 
-	testHelloHelper(*t, "saying hello to people in spanish", "imbdb", "spanish", "Hola, imbdb!")
+	Convey("saying hello to people in spanish", t, func() {
+		got := Hello("imbdb", "spanish")
+		expected := "Hola, imbdb!"
+		So(got, ShouldEqual, expected)
+	})
 
-	testHelloHelper(*t, "saying hello to people in french", "imbdb", "french", "Bonjour, imbdb!")
+	Convey("saying hello to people in french", t, func() {
+		got := Hello("imbdb", "french")
+		expected := "Bonjour, imbdb!"
+		So(got, ShouldEqual, expected)
+	})
 
-	testHelloHelper(*t, "saying 'Hello, World!' when an empty string is supplied", "", "", "Hello, World!")
+	Convey("saying 'Hello, World!' when an empty string is supplied", t, func() {
+		got := Hello("", "")
+		expected := "Hello, World!"
+		So(got, ShouldEqual, expected)
+	})
 
 }
